@@ -1,27 +1,30 @@
-import 'package:restfullapi/service.dart';
+import 'package:restfullapi/producs_model.dart';
+import 'package:restfullapi/product_service.dart';
+import 'package:restfullapi/users_model.dart';
+import 'package:restfullapi/users_service.dart';
 
 void main() async {
-  // ? 200 - 204 - 201 - 317 - 413 - 403 - 405 - 401 - 500 - 404
-  // ? 1- https://www.freetestapi.com/api/v1/products/1
-
-  // ? 2- https://dummyjson.com/products/category-list
-
   // ! 3- https://dummyjson.com/products
-  print(
-    (await getOneData(),),
-  );
 
-  print(
-    (await getAllData()).elementAtOrNull(
-      0,
-    ),
-  );
+  List<ProducsModel> products = await getAllProducts();
 
-  print(
-    (await getOneUserData()).address.geo.lng,
+  List<String> list = List.generate(
+    10,
+    (index) {
+      return "Hello ${index}";
+    },
   );
+  print(list);
 
-  print(
-    (await getOneUserData(),),
-  );
+  for (var element in products) {
+    print(element.category);
+    print("-----------------------------");
+  }
+
+  await logIn(user: UserModel(username: "emilys", password: "emilyspass"));
+  await getMyInfo();
+
+   // ! Decode and Encode 
+   // ! Hashing
+   // ! Encryption and Decryption
 }
